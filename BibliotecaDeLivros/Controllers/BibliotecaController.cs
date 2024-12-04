@@ -134,8 +134,14 @@ namespace BibliotecaDeLivros.Controllers
             }
         };
 
+        [HttpGet]
+        public ActionResult<List<BibliotecaModels>> VerTodosLivros()
+        {
+            return Ok(Biblioteca);
+        }
+
         [HttpPost("alugar/{id}")]
-        public ActionResult AlugarLivro(int id)
+        public ActionResult<List<BibliotecaModels>> AlugarLivro(int id)
         {
             var livro = Biblioteca.Find(x => x.Id == id);  
 
@@ -151,7 +157,22 @@ namespace BibliotecaDeLivros.Controllers
 
             livro.Quantidade--;
 
-            return Ok($"Livro '{livro.Titulo}' alugado com sucesso. Exemplares restantes: {livro.Quantidade}");
+            return Ok($"Livro {livro.Titulo} alugado com sucesso! Quantidade atual: {livro.Quantidade}");
+        }
+
+        [HttpPost("devolucao/{id}")]
+        public ActionResult<List<BibliotecaModels>> DevolverLivro(int id)
+        {
+            var devLivro = Biblioteca.Find(x => x.Id == id);
+
+            if (devLivro == null)
+            {
+                return NotFound($"Livro com ID {id} não encontrado!");
+            }
+
+            devLivro.Quantidade++;
+
+            return Ok($"Livro {devLivro.Titulo} devolvido com sucesso! Quantidade atual: {devLivro.Quantidade}");
         }
 
 
