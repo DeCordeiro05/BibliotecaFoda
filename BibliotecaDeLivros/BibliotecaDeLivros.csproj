@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="C:\Users\jogad\Desktop\fotos do andre pelado aquele gostoso\BibliotecaBeck-End.cs" Link="BibliotecaBeck-End.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 

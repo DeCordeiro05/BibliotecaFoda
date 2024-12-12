@@ -140,7 +140,7 @@ namespace BibliotecaDeLivros.Controllers
             return Ok(Biblioteca);
         }
 
-        [HttpPost("alugar/{id}")]
+        [HttpPut("alugar/{id}")]
         public ActionResult<List<BibliotecaModels>> AlugarLivro(int id)
         {
             var livro = Biblioteca.Find(x => x.Id == id);  
@@ -150,7 +150,7 @@ namespace BibliotecaDeLivros.Controllers
                 return NotFound($"Livro com ID {id} não encontrado!");
             }
 
-            if (livro.Quantidade <= 0)
+            if (livro.Quantidade > 0)
             {
                 return BadRequest("Não há exemplares disponíveis para aluguel.");
             }
@@ -160,7 +160,7 @@ namespace BibliotecaDeLivros.Controllers
             return Ok($"Livro {livro.Titulo} alugado com sucesso! Quantidade atual: {livro.Quantidade}");
         }
 
-        [HttpPost("devolucao/{id}")]
+        [HttpGet("devolucao/{id}")]
         public ActionResult<List<BibliotecaModels>> DevolverLivro(int id)
         {
             var devLivro = Biblioteca.Find(x => x.Id == id);
